@@ -1,2 +1,2 @@
 # Final-Database-project
-final-project-database-final-project created by GitHub Classroom
+Final Project created by Alexander Varghese, Dominick Arnaldo, Jonathan Bar-Eli, and Sarvesh Soni

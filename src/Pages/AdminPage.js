@@ -30,15 +30,25 @@ export const AdminNavigation = () => (
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <Nav.Link href="#link">Link</Nav.Link>
-        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-      </NavDropdown>
+        <Nav.Link href="/">Personal</Nav.Link>
+        <NavDropdown title="Employee" id="basic-nav-dropdown">
+          <NavDropdown.Item href="/">Add Employee</NavDropdown.Item>
+          <NavDropdown.Item href="/">Delete Employee</NavDropdown.Item>
+          <NavDropdown.Item href="/">Update Employee</NavDropdown.Item>
+          <NavDropdown.Item href="/">Search For Employee</NavDropdown.Item>
+        </NavDropdown>
+          <NavDropdown title="Equipment" id="basic-nav-dropdown">
+          <NavDropdown.Item href="/">Add Equipment</NavDropdown.Item>
+          <NavDropdown.Item href="/">Delete Equipment</NavDropdown.Item>
+          <NavDropdown.Item href="/">Assign Equipment</NavDropdown.Item>
+          <NavDropdown.Item href="/">Search For Equipment</NavDropdown.Item>
+        </NavDropdown>
+          <NavDropdown title="Vendor" id="basic-nav-dropdown">
+          <NavDropdown.Item href="/">Add Vendor</NavDropdown.Item>
+          <NavDropdown.Item href="/">Delete Vendor</NavDropdown.Item>
+          <NavDropdown.Item href="/">Update Vendor</NavDropdown.Item>
+          <NavDropdown.Item href="/">Search For Vendor</NavDropdown.Item>
+        </NavDropdown>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
@@ -56,4 +66,5 @@ class AdminPage extends Component {
     }
 }
 
-export default AdminPage;
+
+export default AdminPage; 

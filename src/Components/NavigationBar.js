@@ -39,7 +39,7 @@ export const NavigationBar = () => (
               <Form.Control size="sm" type="text" placeholder="Enter your password"/>
             </Col>
           </Form.Group>
-          <Button variant="primary" type="submit" href="/adminpage">Submit</Button>
+          <Button variant="primary" type="submit">Submit</Button>
         </Form>
         </Nav>
       </Navbar.Collapse>

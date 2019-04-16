@@ -7,13 +7,14 @@ var connection = mysql.createConnection({
     //Server properties
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'sakila'
+    password: 'password',
+    database: 'testlog'
   });
  
+
   connection.connect(function(error) {
     if(!!error) {
-        console.log('Error');
+        console.log(error);
     } else {
         console.log('Connected');
     }
@@ -23,7 +24,7 @@ app.get('/', function(req, resp)  {
     //about mysql
     connection.query("SELECT * FROM  sakila.actor", function(error, rows, fields) {
         if(!!error) {
-            console.log('Error in the query');
+            console.log(error);
         } else {
             console.log('Successful query');
         }

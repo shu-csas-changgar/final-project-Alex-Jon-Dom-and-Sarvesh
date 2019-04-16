@@ -7,19 +7,27 @@ class NavBarClass extends Component {
         super()
 
         this.state = {
-            password: "", 
+            password: "",
             email: ""
         }
-        this.handleChange=this.handleChange.bind(this);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event)   {
-        console.log("here")
-        const name=event.target.name;
-        this.setState({
-            [name]: event.target.value
-        })
+    handleSubmit(event) {
+        event.preventDefault();
         console.log(this.state);
+    }
+    handleEmailChange(event)   {
+        this.setState({
+            email: event.target.value
+        })
+    }
+
+    handlePassChange(event)   {
+        this.setState({
+            password: event.target.value
+        })
     }
 
     render() {
@@ -30,7 +38,7 @@ class NavBarClass extends Component {
 
         .navbar-brand, .navbar-nav .nav-link, .form-label {
             color: #C0C0C0;
-    
+
         &:hover {
             color: white;
         }
@@ -46,17 +54,17 @@ class NavBarClass extends Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
-                            <Form inline>
+                            <Form inline onSubmit={this.handleSubmit}>
                                 <Form.Group as={Row} controlId="formHorizontalEmail">
                                     <Form.Label column sm={1000} name="email" >Email:&nbsp;</Form.Label>
                                     <Col sm={15}>
-                                        <Form.Control onChange={this.handleChange} size="sm" type="email" placeholder="Enter your email" />
+                                        <Form.Control onChange={this.handleEmailChange.bind(this)} value={this.state.email} size="sm" type="email" placeholder="Enter your email" />
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="formHorizontalPassword">
                                     <Form.Label column sm={1000}>Password:&nbsp;</Form.Label>
                                     <Col sm={15}>
-                                        <FormControl size="sm" type="text" placeholder="Enter your password" />
+                                        <FormControl onChange={this.handlePassChange.bind(this)} value={this.state.password} size="sm" type="text" placeholder="Enter your password" />
                                     </Col>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">Submit</Button>

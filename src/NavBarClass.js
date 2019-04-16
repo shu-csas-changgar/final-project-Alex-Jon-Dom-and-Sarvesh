@@ -37,7 +37,7 @@ class NavBarClass extends Component {
     }
         .form-inline > * {
             margin:5px 3px;
-    }
+        }
     `
         return (
             <Styles>
@@ -46,11 +46,11 @@ class NavBarClass extends Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
-                            <Form inline>
+                            <Form inline onSubmit={this.handleChange}>
                                 <Form.Group as={Row} controlId="formHorizontalEmail">
                                     <Form.Label column sm={1000} name="email" >Email:&nbsp;</Form.Label>
                                     <Col sm={15}>
-                                        <Form.Control onChange={this.handleChange} size="sm" type="email" placeholder="Enter your email" />
+                                        <Form.Control size="sm" type="email" placeholder="Enter your email" />
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="formHorizontalPassword">

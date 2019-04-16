@@ -4,6 +4,7 @@ import Home from './Pages/Home';
 import { About } from './Pages/About';
 import { NoMatch } from './Pages/NoMatch';
 import AdminPage from './Pages/AdminPage';
+import EmployeePage from './Pages/EmployeePage';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/adminpage" component={AdminPage} />
               <Route path="/about" component={About} />
+              <Route path ="/employeepage" component={EmployeePage} />
               <Route component={NoMatch} />
             </Switch>
           </Router>

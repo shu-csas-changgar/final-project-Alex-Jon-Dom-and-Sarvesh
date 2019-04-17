@@ -55,7 +55,6 @@ export const AdminNavigation = () => (
 </Styles>
 )
 
-
 class AdminPage extends Component {
     render ()  {
         return (

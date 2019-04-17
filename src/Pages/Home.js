@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Jumbotron } from '../Components/Jumbotron';
 import { Navbar } from 'react-bootstrap';
+import NavigationBar from '../Components/NavigationBar';
 import styled from 'styled-components';
-import NavBarClass from '../NavBarClass';
+
 
 const Styles = styled.div`
 .navbar {
@@ -36,7 +37,7 @@ class Home extends Component {
   render()  {
     return (
       <React.Fragment>
-        <NavBarClass />
+        <NavigationBar />
         <Jumbotron />
         <BottomNavigationBar />
       </React.Fragment>

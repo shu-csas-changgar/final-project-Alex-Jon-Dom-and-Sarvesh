@@ -44,7 +44,6 @@ export const EmployeeNavigation = () => (
   </Navbar.Collapse>
 </Navbar>
 </Styles>
-
 )
 
  

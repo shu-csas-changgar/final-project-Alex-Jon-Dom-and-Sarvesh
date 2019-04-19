@@ -46,8 +46,6 @@ export const EmployeeNavigation = () => (
 </Styles>
 )
 
- 
-
 export const BottomNavigationBar = () => (
     <Styles>
       <Navbar expand="lg" fixed="bottom">
@@ -59,8 +57,6 @@ export const BottomNavigationBar = () => (
     </Styles>
 
   )
-
- 
 
 class EmployeePage extends Component {
     render ()  {

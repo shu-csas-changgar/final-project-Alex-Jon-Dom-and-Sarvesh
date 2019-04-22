@@ -20,16 +20,25 @@ var connection = mysql.createConnection({
     }
 });
 
-app.get('/', function(req, resp)  {
-    //about mysql
-    connection.query("SELECT * FROM  sakila.actor", function(error, rows, fields) {
-        if(!!error) {
-            console.log(error);
-        } else {
-            console.log('Successful query');
-        }
-    });
-})
+app.use(express.json())
+
+app.post('/log', (req, res) => {
+    const username = req.body.email
+    const password = req.body.password
+    const sql = 'SELECT username, password FROM account WHERE username = ? AND password = ?'
+  
+    connection.query(sql, [username, password], (err, rows, fields) => {
+      if(err) console.log(err)
+      else if(rows.length === 0){
+        console.log("The username or password was incorrect")
+        res.json("INVALID")
+      } 
+      else{
+        rows.map( x => console.log(`Success`))
+        res.json(rows)
+      }
+    })
+  })
 
 app.listen('3003', () => {
     console.log("Server is up and listening on 3003...")

@@ -30,8 +30,35 @@ class NavigationBar extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
+        event.target.className += " was-validated"
+        this.state.email.length > 0 && this.state.password.length ? this.sendData() : console.log("Fields not complete")
     }
+
+    sendData = () => {
+        fetch('log', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.state)
+        })
+        .then( res => res.json())
+        .then( data => {
+          if (data === "INVALID") {
+            // Sent the state's message
+            console.log(data)
+            this.setState({message: "Username or password is incorrect"})
+          }
+          else{
+            // Set the global state to true
+            console.log(data)
+          } 
+        })
+        .catch((error) =>{
+          this.setState({message: "Unable to connect to the server at this time"})
+        })
+      }
+    
     handleEmailChange(event)   {
         this.setState({
             email: event.target.value

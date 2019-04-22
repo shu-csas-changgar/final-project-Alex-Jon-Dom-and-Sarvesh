@@ -52,6 +52,8 @@ class NavigationBar extends Component {
           else{
             // Set the global state to true
             console.log(data)
+            this.props.action()
+            this.props.history.push('/employeepage')
           } 
         })
         .catch((error) =>{

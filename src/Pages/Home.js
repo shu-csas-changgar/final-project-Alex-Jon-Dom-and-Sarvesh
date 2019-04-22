@@ -37,7 +37,7 @@ class Home extends Component {
   render()  {
     return (
       <React.Fragment>
-        <NavigationBar />
+        <NavigationBar action={this.props.action} history={this.props.history} />
         <Jumbotron />
         <BottomNavigationBar />
       </React.Fragment>

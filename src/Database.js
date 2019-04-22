@@ -22,7 +22,7 @@ var connection = mysql.createConnection({
 
 app.use(express.json())
 
-app.post('/log', (req, res) => {
+app.post('/userlogin', (req, res) => {
     const username = req.body.email
     const password = req.body.password
     const sql = 'SELECT username, password FROM account WHERE username = ? AND password = ?'
@@ -43,5 +43,3 @@ app.post('/log', (req, res) => {
 app.listen('3003', () => {
     console.log("Server is up and listening on 3003...")
 });
-
-

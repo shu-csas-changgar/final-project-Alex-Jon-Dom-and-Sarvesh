@@ -35,8 +35,6 @@ export const EmployeeNavigation = () => (
       <Nav className="mr-auto">
         <Nav.Link href="/">Personal</Nav.Link>
           <NavDropdown title="Equipment" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/">Add Equipment</NavDropdown.Item>
-          <NavDropdown.Item href="/">Delete Equipment</NavDropdown.Item>
           <NavDropdown.Item href="/">Assign Equipment</NavDropdown.Item>
           <NavDropdown.Item href="/">Search For Equipment</NavDropdown.Item>
         </NavDropdown>       

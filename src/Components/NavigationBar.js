@@ -35,7 +35,7 @@ class NavigationBar extends Component {
     }
 
     sendData = () => {
-        fetch('log', {
+        fetch('userlogin', {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'

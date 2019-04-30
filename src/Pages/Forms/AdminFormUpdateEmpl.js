@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, NavDropdown, Navbar, Button } from 'react-bootstrap';
+import { Nav, NavDropdown, Navbar, Button, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Styles = styled.div`

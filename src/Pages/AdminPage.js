@@ -32,7 +32,7 @@ export const AdminNavigation = () => (
       <Nav className="mr-auto">
         <Nav.Link href="/">Personal</Nav.Link>
         <NavDropdown title="Employee" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/">Add Employee</NavDropdown.Item>
+          <NavDropdown.Item>Add Employee</NavDropdown.Item>
           <NavDropdown.Item href="/">Delete Employee</NavDropdown.Item>
           <NavDropdown.Item href="/">Update Employee</NavDropdown.Item>
           <NavDropdown.Item href="/">Search For Employee</NavDropdown.Item>
@@ -56,10 +56,21 @@ export const AdminNavigation = () => (
 )
 
 class AdminPage extends Component {
+constructor(props)  {
+  super(props)
+  this.handleSubmit = this.handleSubmit.bind(this);
+
+}
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.history.push("/employeepage")
+  }
     render ()  {
         return (
           <React.Fragment>
             <AdminNavigation />
+            <Button variant="primary" type="submit" onSubmit={this.handleSubmit}>Submit</Button>
           </React.Fragment>
         );
     }

@@ -89,11 +89,7 @@ export const Form = () => (
 class AdminFormDelEmpl extends Component {
     render ()  {
         return (
-          <React.Fragment>
-            <AdminNavigation />
-            <Form />
-            <BottomNavigationBar />
-          </React.Fragment>
+          "Delete Employee"
         );
     }
 }

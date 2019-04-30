@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Nav, Navbar, Button, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
 
-
 const Styles = styled.div`
 .navbar {
     background-color: #222;
@@ -20,7 +19,7 @@ const Styles = styled.div`
 `
 
 export const EmployeeNavigation = () => (
-  <Styles>  
+  <Styles>
     <Navbar>
       <Navbar.Brand href="/">ABC Group</Navbar.Brand>
       <Navbar.Toggle />
@@ -37,7 +36,7 @@ export const EmployeeNavigation = () => (
           <NavDropdown title="Equipment" id="basic-nav-dropdown">
           <NavDropdown.Item href="/">Assign Equipment</NavDropdown.Item>
           <NavDropdown.Item href="/">Search For Equipment</NavDropdown.Item>
-        </NavDropdown>       
+        </NavDropdown>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
@@ -48,7 +47,7 @@ export const BottomNavigationBar = () => (
     <Styles>
       <Navbar expand="lg" fixed="bottom">
       <Navbar.Brand href="/help">Help</Navbar.Brand>
-      <Navbar.Brand position="right">Address: 400 South Orange Ave, South Orange, NJ 07079</Navbar.Brand> 
+      <Navbar.Brand position="right">Address: 400 South Orange Ave, South Orange, NJ 07079</Navbar.Brand>
       <Navbar.Brand position="right">Contact: (973) 761-9000</Navbar.Brand>    
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       </Navbar>

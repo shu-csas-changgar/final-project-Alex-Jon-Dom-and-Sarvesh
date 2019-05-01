@@ -3,9 +3,11 @@ import { Nav, NavDropdown, Navbar, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { LinkContainer } from 'react-router-bootstrap';
 import Employee from './EmployeePage';
-import AddEmpl from '../Pages/Forms/AdminFormAddEmpl';
-import DelEmpl from '../Pages/Forms/AdminFormDelEmpl';
+import AdminFormAddEmpl from './Forms/AdminFormAddEmpl';
+import AdminFormDelEmpl from './Forms/AdminFormDelEmpl';
 import styled from 'styled-components';
+
+
 
 const Styles = styled.div`
 .navbar {
@@ -34,6 +36,16 @@ export const BottomNavigationBar = () => (
 )
 
 class AdminPage extends Component {
+
+  state = {
+    fields: {}
+  };
+
+  onSubmit = fields => {
+    this.setState({ fields });
+    console.log("Comp got: ", fields);
+  };
+
     render ()  {
         return (
           <React.Fragment>
@@ -81,8 +93,8 @@ class AdminPage extends Component {
               </Navbar>
               <BottomNavigationBar />
               </Styles>
-              <Route path="/add-employee" component={AddEmpl} />
-              <Route path="/delete-employee" component={DelEmpl} />
+              <Route path="/add-employee" component={AdminFormAddEmpl} />
+              <Route path="/delete-employee" component={AdminFormDelEmpl} />
               <Route path="/employee" component={Employee} />
               </Router>
           </React.Fragment>

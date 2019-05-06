@@ -1,7 +1,7 @@
 import React from 'react';
-import AddEmpl from '../../Components/AddEmpl'
+import DelSearchEqu from '../../Components/DelSearchEqu'
 
-export default class AdminFormAddEmpl extends React.Component {
+export default class AdminFormDelSearchEqu extends React.Component {
   state = {
     fields: {}
   };
@@ -15,7 +15,7 @@ export default class AdminFormAddEmpl extends React.Component {
 
       return (
           <div>
-            <AddEmpl onSubmit={fields => this.onSubmit(fields)} />
+            <DelSearchEqu onSubmit={fields => this.onSubmit(fields)} />  
           </div>          
           );             
   } 

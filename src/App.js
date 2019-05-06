@@ -6,7 +6,7 @@ import { NoMatch } from './Pages/NoMatch';
 import  { ProtectedRoute } from './ProtectedRoute';
 import EmployeePage from './Pages/EmployeePage';
 import AdminPage from './Pages/AdminPage';
-import  AdminFormSearchVend  from './Pages/Forms/AdminFormSearchVend';
+
 
 
 class App extends Component {
@@ -38,7 +38,6 @@ handler()   {
               <ProtectedRoute exact path = "/adminpage" component = {AdminPage} Logged={this.state.LoggedIn} />
               <ProtectedRoute exact path = "/employeepage" component = {EmployeePage} Logged={this.state.LoggedIn} />
               <Route path="/about" component={About} />
-              <Route path="/adminvend" component={AdminFormSearchVend} />
               <Route component={NoMatch} />
             </Switch>
           </Router>

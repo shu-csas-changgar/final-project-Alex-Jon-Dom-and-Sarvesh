@@ -1,12 +1,11 @@
 import React from 'react';
 
 
-export default class AddEmpl extends React.Component {
+export default class AssignEqu extends React.Component {
   state = {
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      role: '',
+      serialNum: '',
+      employeeId: '',
+      DepartmentId: '',
       officeLocation: '',
       floor: '',
       room: '',
@@ -22,10 +21,9 @@ export default class AddEmpl extends React.Component {
       e.preventDefault();
       this.props.onSubmit(this.state);
       this.setState({
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
-        role: '',
+        serialNum: '',
+        employeeId: '',
+        DepartmentId: '',
         officeLocation: '',
         floor: '',
         room: '',
@@ -36,38 +34,39 @@ export default class AddEmpl extends React.Component {
   render() {
       return (
           <form>
-              <br />
+
+              <p>Please enter the serial number of the equipment to be assigned</p>
+
               <input
-               name='firstName'
-               placeholder='First Name' 
-               value={this.state.firstName} 
+               name='serialNum'
+               placeholder='Serial Number' 
+               value={this.state.serialNum} 
                onChange={e => this.change(e)}
                />
                <br />
+
+               <p></p>
+               <p>Assign to either:</p>
   
               <input
-               name='lastName'
-               placeholder='Last Name' 
-               value={this.state.lastName} 
+               name='employeeId'
+               placeholder='Employee ID' 
+               value={this.state.employeeId} 
                onChange={e => this.change(e)}
                />
                <br />
+
+               <p>OR</p>
   
               <input
-               name='phoneNumber'
-               placeholder='Phone Number' 
-               value={this.state.phoneNumber} 
+               name='DepartmentId'
+               placeholder='Department ID' 
+               value={this.state.DepartmentId} 
                onChange={e => this.change(e)}             
                />
                <br />
-  
-              <input
-               name='role'
-               placeholder='Role' 
-               value={this.state.role} 
-               onChange={e => this.change(e)}            
-               />
-               <br />
+
+               <p>OR</p>
   
               <input
                name='officeLocation'
@@ -93,6 +92,7 @@ export default class AddEmpl extends React.Component {
                />
                <br />
                <br />
+
                <button onClick={e => this.onSubmit(e)}>Submit</button>
   
           </form>

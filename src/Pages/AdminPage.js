@@ -3,10 +3,14 @@ import { Nav, NavDropdown, Navbar, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { LinkContainer } from 'react-router-bootstrap';
 import Employee from './EmployeePage';
-import AdminFormAddEmpl from './Forms/AdminFormAddEmpl';
-import AdminFormDelEmpl from './Forms/AdminFormDelEmpl';
 import styled from 'styled-components';
-
+import AdminFormAddEmpl from './Forms/AdminFormAddEmpl'
+import AdminFormRestEmpl from './Forms/AdminFormRestEmpl'
+import AdminFormAddEqu from './Forms/AdminFormAddEqu'
+import AdminFormAssignEqu from './Forms/AdminFormAssignEqu'
+import AdminFormDelSearchEqu from './Forms/AdminFormDelSearchEqu'
+import AdminFormDelSearchVen from './Forms/AdminFormDelSearchVen'
+import AdminFormAddVen from './Forms/AdminFormAddVen'
 
 
 const Styles = styled.div`
@@ -74,19 +78,34 @@ class AdminPage extends Component {
                       <LinkContainer to="/update-employee">
                         <NavDropdown.Item>Update Employee</NavDropdown.Item>
                       </LinkContainer>
+                      <LinkContainer to="/search-employee">
                         <NavDropdown.Item>Search For Employee</NavDropdown.Item>
+                      </LinkContainer>
                       </NavDropdown>
-                        <NavDropdown title="Equipment" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/employee">Add Equipment</NavDropdown.Item>
-                        <NavDropdown.Item href="/">Delete Equipment</NavDropdown.Item>
-                        <NavDropdown.Item href="/">Assign Equipment</NavDropdown.Item>
-                        <NavDropdown.Item href="/">Search For Equipment</NavDropdown.Item>
+                      <NavDropdown title="Equipment" id="basic-nav-dropdown">
+                      <LinkContainer to="/add-equipment">
+                        <NavDropdown.Item>Add Equipment</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/delete-equipment">
+                        <NavDropdown.Item>Delete Equipment</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/assign-equipment">
+                        <NavDropdown.Item>Assign Equipment</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/search-equipment">
+                        <NavDropdown.Item>Search For Equipment</NavDropdown.Item>
+                      </LinkContainer>
                       </NavDropdown>
-                        <NavDropdown title="Vendor" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/">Add Vendor</NavDropdown.Item>
-                        <NavDropdown.Item href="/">Delete Vendor</NavDropdown.Item>
-                        <NavDropdown.Item href="/">Update Vendor</NavDropdown.Item>
-                        <NavDropdown.Item href="/">Search For Vendor</NavDropdown.Item>
+                      <NavDropdown title="Vendor" id="basic-nav-dropdown">
+                      <LinkContainer to="/add-vendor">
+                        <NavDropdown.Item>Add Vendor</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/delete-vendor">
+                         <NavDropdown.Item>Delete Vendor</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/search-vendor">
+                      <NavDropdown.Item>Search For Vendor</NavDropdown.Item>
+                      </LinkContainer>
                       </NavDropdown>
                   </Nav>
                 </Navbar.Collapse>
@@ -94,8 +113,17 @@ class AdminPage extends Component {
               <BottomNavigationBar />
               </Styles>
               <Route path="/add-employee" component={AdminFormAddEmpl} />
-              <Route path="/delete-employee" component={AdminFormDelEmpl} />
-              <Route path="/employee" component={Employee} />
+              <Route path="/delete-employee" component={AdminFormRestEmpl}/>
+              <Route path="/search-employee" component={AdminFormRestEmpl}/>
+              <Route path="/update-employee" component={AdminFormRestEmpl}/>
+              <Route path="/add-equipment" component={AdminFormAddEqu} />
+              <Route path="/delete-equipment" component={AdminFormDelSearchEqu}/>
+              <Route path="/assign-equipment" component={AdminFormAssignEqu}/>
+              <Route path="/search-equipment" component={AdminFormDelSearchEqu}/>
+              <Route path="/add-vendor" component={AdminFormAddVen}/>
+              <Route path="/delete-vendor" component={AdminFormDelSearchVen}/>
+              <Route path="/search-vendor" component={AdminFormDelSearchVen}/>
+              <Route path="/employee" component={Employee} />      
               </Router>
           </React.Fragment>
         );

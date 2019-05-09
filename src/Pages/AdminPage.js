@@ -30,16 +30,16 @@ const Styles = styled.div`
 export const BottomNavigationBar = () => (
   <Styles>
     <Navbar expand="lg" fixed="bottom">
-    <Navbar.Brand href="/help">Help</Navbar.Brand>
-    <Navbar.Brand position="right">Address: 400 South Orange Ave, South Orange, NJ 07079</Navbar.Brand>
-    <Navbar.Brand position="right">Contact: (973) 761-9000</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Brand href="/help">Help</Navbar.Brand>
+      <Navbar.Brand position="right">Address: 400 South Orange Ave, South Orange, NJ 07079</Navbar.Brand>
+      <Navbar.Brand position="right">Contact: (973) 761-9000</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
     </Navbar>
   </Styles>
 
 )
 
-class AdminPage extends Component {
+export default class AdminPage extends Component {
 
   state = {
     fields: {}

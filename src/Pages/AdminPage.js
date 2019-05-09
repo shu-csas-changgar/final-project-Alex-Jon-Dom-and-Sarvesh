@@ -50,6 +50,7 @@ export default class AdminPage extends Component {
     console.log("Comp got: ", fields);
   };
 
+<<<<<<< HEAD
     render ()  {
         return (
           <React.Fragment>
@@ -132,3 +133,86 @@ export default class AdminPage extends Component {
 
 
 export default AdminPage;
+=======
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <Styles>
+            <Navbar>
+              <Navbar.Brand href="/">ABC Group</Navbar.Brand>
+              <Navbar.Toggle />
+              <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text>Signed in as: Alexander Varghese&nbsp;</Navbar.Text>
+              </Navbar.Collapse>
+              <Button href="/">Sign Out</Button>
+            </Navbar>
+            <Navbar expand="lg">
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link>Personal</Nav.Link>
+                  <NavDropdown title="Employee" id="basic-nav-dropdown">
+                    <LinkContainer to="/add-employee">
+                      <NavDropdown.Item>Add Employee</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/delete-employee">
+                      <NavDropdown.Item>Delete Employee</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/update-employee">
+                      <NavDropdown.Item>Update Employee</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/search-employee">
+                      <NavDropdown.Item>Search For Employee</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                  <NavDropdown title="Equipment" id="basic-nav-dropdown">
+                    <LinkContainer to="/add-equipment">
+                      <NavDropdown.Item>Add Equipment</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/delete-equipment">
+                      <NavDropdown.Item>Delete Equipment</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/assign-equipment">
+                      <NavDropdown.Item>Assign Equipment</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/search-equipment">
+                      <NavDropdown.Item>Search For Equipment</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                  <NavDropdown title="Vendor" id="basic-nav-dropdown">
+                    <LinkContainer to="/add-vendor">
+                      <NavDropdown.Item>Add Vendor</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/delete-vendor">
+                      <NavDropdown.Item>Delete Vendor</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/search-vendor">
+                      <NavDropdown.Item>Search For Vendor</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+            <BottomNavigationBar />
+          </Styles>
+          <Route path="/add-employee" component={AdminFormAddEmpl} />
+          <Route path="/delete-employee" component={AdminFormRestEmpl} />
+          <Route path="/search-employee" component={AdminFormRestEmpl} />
+          <Route path="/update-employee" component={AdminFormRestEmpl} />
+          <Route path="/add-equipment" component={AdminFormAddEqu} />
+          <Route path="/delete-equipment" component={AdminFormDelSearchEqu} />
+          <Route path="/assign-equipment" component={AdminFormAssignEqu} />
+          <Route path="/search-equipment" component={AdminFormDelSearchEqu} />
+          <Route path="/add-vendor" component={AdminFormAddVen} />
+          <Route path="/delete-vendor" component={AdminFormDelSearchVen} />
+          <Route path="/search-vendor" component={AdminFormDelSearchVen} />
+          <Route path="/employee" component={Employee} />
+        </Router>
+      </React.Fragment>
+    );
+  }
+}
+
+
+>>>>>>> 28e81e496876f545f0ea035e47ff4bd51ed19f4f

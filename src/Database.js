@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'testlog'
+    database: 'database_project'
   });
 
 
@@ -22,10 +22,11 @@ var connection = mysql.createConnection({
 
 app.use(express.json())
 
+//USER LOGIN
 app.post('/userlogin', (req, res) => {
     const username = req.body.email
     const password = req.body.password
-    const sql = 'SELECT username, password FROM account WHERE username = ? AND password = ?'
+    const sql = 'SELECT Email, Password FROM employee WHERE Email = ? AND Password = ?'
 
     connection.query(sql, [username, password], (err, rows, fields) => {
       if(err) console.log(err)
@@ -40,7 +41,8 @@ app.post('/userlogin', (req, res) => {
     })
   })
 
-  app.post('/update', (req, res) => {
+//ADD EMPLOYEE
+  app.post('/query/addempl', (req, res) => {
     const fn = req.body.firstName;
     const ln = req.body.lastName;
     const pn = req.body.phoneNumber;
@@ -50,21 +52,42 @@ app.post('/userlogin', (req, res) => {
     const office = req.body.officeLocation;
     const floor = req.body.floor;
     const room = req.body.room;
+    const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-    const sql = 'INSERT INTO final_database_project.employee (First_Name, Last_Name, Email, Password, Role_ID, Office_Location_ID) VALUES(?, ?, ?, ?, ?, ?)'
+    const sql = "INSERT INTO employee (First_Name, Last_Name, Email, Password, Phone_Number, Role_ID, Office_Location_ID, Last_Updated) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
 
-      connection.query(sql, [fn, ln, email, pass, role, office], (err, rows, fields) => {
+      connection.query(sql, [fn, ln, email, pass, pn, role, office, now], (err, rows, fields) => {
         if(err) console.log(err)
         else if(rows.length === 0){
           console.log("Error")
           res.json("INVALID")
         }
-        else{
-          rows.map( x => console.log(`Success`))
+        else {
           res.json(rows)
         }
       })
     })
+
+// ADD EQUIPMENT
+    app.post('/query/addequ', (req, res) => {
+      const type = req.body.type;
+      const serialNum = req.body.serialNum;
+      const vendorId = req.body.vendorId;
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Last_Updated) VALUES(?, ?, ?, ?)"
+
+        connection.query(sql, [type, serialNum, vendorId, now], (err, rows, fields) => {
+          if(err) console.log(err)
+          else if(rows.length === 0){
+            console.log("Error")
+            res.json("INVALID")
+          }
+          else {
+            res.json(rows)
+          }
+        })
+      })
 
 app.listen('3003', () => {
     console.log("Server is up and listening on 3003...")

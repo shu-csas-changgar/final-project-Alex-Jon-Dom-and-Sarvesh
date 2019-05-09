@@ -14,7 +14,7 @@ export default class AdminFormAddEmpl extends React.Component {
   };
 
   sendData = () => {
-      fetch('../../update', {
+      fetch('../../query/addempl', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

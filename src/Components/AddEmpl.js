@@ -23,15 +23,6 @@ export default class AddEmpl extends React.Component {
   onSubmit = e => {
       e.preventDefault();
       this.props.onSubmit(this.state);
-      this.setState({
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
-        role: '',
-        officeLocation: '',
-        floor: '',
-        room: '',
-      });
   };
 
 

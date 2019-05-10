@@ -22,11 +22,15 @@ export default class AdminFormHomePage extends React.Component {
         vendors: [],
         equipment: [],
         editEmpModalShow: false,
-        editEmp: {}
+        editEmp: {},
+        editVenModalShow: false,
+        editVen: {}
     }
 
     this.editEmpModalShow = this.editEmpModalShow.bind(this);
     this.editEmpModalClose = this.editEmpModalClose.bind(this);
+    this.editVenModalShow = this.editVenModalShow.bind(this);
+    this.editVenModalClose = this.editVenModalClose.bind(this);
   }
 
   filterSearch(id, e) {
@@ -51,18 +55,24 @@ export default class AdminFormHomePage extends React.Component {
     this.setState({ editEmpModalShow: true });
   }
 
+  editVenModalClose() {
+    this.setState({ editVenModalShow: false });
+  }
+
+  editVenModalShow() {
+    this.setState({ editVenModalShow: true });
+  }
+
   editEmp(obj) {
     this.editEmpModalShow();
     this.setState({editEmp: obj});
   }
 
-  updateEmpState(field, e) {
-    var editEmp = {...this.state.editEmp};
-    editEmp[field] = e.target.value;
-    this.setState({editEmp});
-    console.log(this.state.editEmp);
-    console.log(this.state.editEmp);
+  editVen(obj) {
+    this.editVenModalShow();
+    this.setState({editVen: obj});
   }
+
 
   editEmployee(emp) {
     var inputs = document.getElementById("editEmployeeForm").getElementsByTagName("input");
@@ -100,6 +110,43 @@ export default class AdminFormHomePage extends React.Component {
     });
   }
 
+  editVendor(ven) {
+    var inputs = document.getElementById("editVendorForm").getElementsByTagName("input");
+    var converted = {id: ven};
+    for (var i = 0; i < inputs.length; i++) {
+      converted[inputs[i].name] = inputs[i].value;
+    }
+    console.log(converted)
+    fetch('../../query/updateven', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(converted)
+    })
+    .then( res => res.json())
+    .then( data => {
+      if (data === "INVALID") {
+        // Sent the state's message
+        console.log(data)
+        this.setState({message: "There was an error updating that employee!"})
+      }
+      else{
+        //EMPLOYEES
+        fetch('../../query/getvendors')
+        .then( res => res.json())
+        .then( data => this.setState({vendors: data }))
+        .then(this.editVenModalClose())
+        .catch((error) =>{
+          this.setState({message: "Unable to connect to the server at this time"})
+        })
+      }
+    })
+    .catch((error) =>{
+      this.setState({message: "Unable to connect to the server at this time"})
+    });
+  }
+
   deleteEmp(emp) {
     if (window.confirm("Are you sure you want to delete employee ID #" + emp)) {
       fetch('../../query/delemp', {
@@ -121,6 +168,38 @@ export default class AdminFormHomePage extends React.Component {
           fetch('../../query/getemployees')
           .then( res => res.json())
           .then( data => this.setState({employees: data }))
+          .catch((error) =>{
+            this.setState({message: "Unable to connect to the server at this time"})
+          })
+        }
+      })
+      .catch((error) =>{
+        this.setState({message: "Unable to connect to the server at this time"})
+      });
+    }
+  }
+
+  deleteVen(ven) {
+    if (window.confirm("Are you sure you want to delete Vendor ID #" + ven)) {
+      fetch('../../query/delven', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id: ven})
+      })
+      .then( res => res.json())
+      .then( data => {
+        if (data === "INVALID") {
+          // Sent the state's message
+          console.log(data)
+          this.setState({message: "There was an error deleting that vendor!"})
+        }
+        else{
+          //Vendors
+          fetch('../../query/getvendors')
+          .then( res => res.json())
+          .then( data => this.setState({vendors: data }))
           .catch((error) =>{
             this.setState({message: "Unable to connect to the server at this time"})
           })
@@ -205,6 +284,31 @@ export default class AdminFormHomePage extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
+        <Modal show={this.state.editVenModalShow} onHide={this.editVenModalClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Vendor</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form id="editVendorForm">
+              <Form.Group controlId="ControlInput1">
+                <Form.Label>Vendor Name</Form.Label>
+                <Form.Control name="vendorName" defaultValue={this.state.editVen.Vendor_Name} type="text" placeholder="Vendor Name" />
+              </Form.Group>
+              <Form.Group controlId="ControlInput2">
+                <Form.Label>Phone Number</Form.Label>
+                <Form.Control name="phoneNumber" defaultValue={this.state.editVen.Vendor_Phone_Number} type="tel" placeholder="Phone Number" />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.editVenModalClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={this.editVendor.bind(this, this.state.editVen.Vendor_ID)}>
+              Edit Vendor
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <Card style={{margin: "0 auto", width: "95%"}}>
           <Card.Header as="h5">Admin Panel</Card.Header>
           <Card.Body>
@@ -272,6 +376,8 @@ export default class AdminFormHomePage extends React.Component {
                       <th>ID</th>
                       <th>Vendor Name</th>
                       <th>Phone Number</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -280,6 +386,12 @@ export default class AdminFormHomePage extends React.Component {
                       <td>{el.Vendor_ID}</td>
                       <td>{el.Vendor_Name}</td>
                       <td>{el.Vendor_Phone_Number}</td>
+                      <td><Button variant="primary" onClick={this.editVen.bind(this, el)}>
+                            Edit
+                          </Button></td>
+                      <td><Button variant="primary" onClick={this.deleteVen.bind(this, el.Vendor_ID)}>
+                            Delete
+                          </Button></td>
                     </tr>
                   ))}
                   </tbody>
@@ -303,18 +415,17 @@ export default class AdminFormHomePage extends React.Component {
                       <th>Serial #</th>
                       <th>Vendor ID</th>
                       <th>Type</th>
-                      <th>Location</th>
                     </tr>
                   </thead>
                   <tbody>
-                  {/*this.state.equipment.map(el => (
+                  {this.state.equipment.map(el => (
                     <tr key={"equipment-" + el.Equipment_Serial_Number}>
                       <td>{el.Equipment_Serial_Number}</td>
                       <td>{el.Vendor_ID}</td>
                       <td>{el.Equipment_Type}</td>
-                      <td>{el.Office_Location_ID}</td>
+                      
                     </tr>
-                  ))*/}
+                  ))}
                   </tbody>
                 </Table>
               </Tab>

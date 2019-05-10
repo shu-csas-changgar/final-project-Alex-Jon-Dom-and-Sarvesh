@@ -59,7 +59,7 @@ app.get('/query/getvendors', (req, res) => {
 
 //EQUIPMENT
 app.get('/query/getequipment', (req, res) => {
-    const sql = 'SELECT * FROM equipment'
+    const sql = 'SELECT * FROM equipment WHERE Room_ID = 1'
 
     connection.query(sql, (err, rows, fields) => {
       if(err) console.log(err)
@@ -126,7 +126,7 @@ app.post('/userlogin', (req, res) => {
       const vendorId = req.body.vendorId;
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Room_ID, Last_Updated) VALUES(?, ?, ?, 1, ?)"
+      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Room_ID, Last_Updated) VALUES(?, ?, ?, ?, ?)"
 
         connection.query(sql, [type, serialNum, vendorId, now], (err, rows, fields) => {
           if(err) console.log(err)
@@ -181,6 +181,26 @@ app.post('/query/delemp', (req, res) => {
         }
       })
     })
+
+    app.post('/query/updateven', (req, res) => {
+      const id = req.body.id;
+      const vn = req.body.vendorName;
+      const pn = req.body.phoneNumber;
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  
+      const sql = "UPDATE vendor SET Vendor_Name = ?, Vendor_Phone_Number = ?, Last_Updated = ? WHERE Vendor_ID = ?"
+  
+        connection.query(sql, [vn, pn, now, id], (err, rows, fields) => {
+          if(err) console.log(err)
+          else if(rows.length === 0){
+            console.log("Error")
+            res.json("INVALID")
+          }
+          else {
+            res.json(rows)
+          }
+        })
+      })
 
 app.listen('3003', () => {
     console.log("Server is up and listening on 3003...")

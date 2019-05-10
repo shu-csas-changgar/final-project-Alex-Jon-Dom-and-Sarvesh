@@ -12,3 +12,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.navbar-light .navbar-nav .show>.nav-link {
+  color: white !important;
+}
+
+.card-header-tabs {
+  margin: 0 !important;
+  border-bottom: 1px solid #dee2e6 !important;
+}

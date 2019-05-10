@@ -22,6 +22,59 @@ var connection = mysql.createConnection({
 
 app.use(express.json())
 
+//FETCH TABLES
+//EMPLOYEES
+app.get('/query/getemployees', (req, res) => {
+    const sql = 'SELECT * FROM employee'
+
+    connection.query(sql, (err, rows, fields) => {
+      if(err) console.log(err)
+      else if(rows.length === 0){
+        console.log("Error")
+        res.json("INVALID")
+      }
+      else{
+        rows.map( x => console.log(`Success`))
+        res.json(rows)
+      }
+    })
+  })
+
+//VENDORS
+app.get('/query/getvendors', (req, res) => {
+    const sql = 'SELECT * FROM vendor'
+
+    connection.query(sql, (err, rows, fields) => {
+      if(err) console.log(err)
+      else if(rows.length === 0){
+        console.log("Error")
+        res.json("INVALID")
+      }
+      else{
+        rows.map( x => console.log(`Success`))
+        res.json(rows)
+      }
+    })
+  })
+
+//EQUIPMENT
+app.get('/query/getequipment', (req, res) => {
+    const sql = 'SELECT * FROM equipment'
+
+    connection.query(sql, (err, rows, fields) => {
+      if(err) console.log(err)
+      else if(rows.length === 0){
+        console.log("Error")
+        res.json("INVALID")
+      }
+      else{
+        rows.map( x => console.log(`Success`))
+        res.json(rows)
+      }
+    })
+  })
+
+
 //USER LOGIN
 app.post('/userlogin', (req, res) => {
     const username = req.body.email

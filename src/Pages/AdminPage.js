@@ -11,7 +11,7 @@ import AdminFormAssignEqu from './Forms/AdminFormAssignEqu'
 import AdminFormDelSearchEqu from './Forms/AdminFormDelSearchEqu'
 import AdminFormDelSearchVen from './Forms/AdminFormDelSearchVen'
 import AdminFormAddVen from './Forms/AdminFormAddVen'
-
+import AdminFormHome from './Forms/AdminFormHome'
 
 const Styles = styled.div`
 .navbar {
@@ -29,7 +29,7 @@ const Styles = styled.div`
 
 export const BottomNavigationBar = () => (
   <Styles>
-    <Navbar expand="lg" fixed="bottom">
+    <Navbar expand="lg" sticky="bottom">
       <Navbar.Brand href="/help">Help</Navbar.Brand>
       <Navbar.Brand position="right">Address: 400 South Orange Ave, South Orange, NJ 07079</Navbar.Brand>
       <Navbar.Brand position="right">Contact: (973) 761-9000</Navbar.Brand>
@@ -56,7 +56,9 @@ export default class AdminPage extends Component {
           <Router>
                 <Styles>
                   <Navbar>
-                    <Navbar.Brand href="/">ABC Group</Navbar.Brand>
+                  <LinkContainer to="/adminpage">
+                    <Navbar.Brand>ABC Group</Navbar.Brand>
+                  </LinkContainer>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                       <Navbar.Text>Signed in as: Alexander Varghese&nbsp;</Navbar.Text>
@@ -111,6 +113,7 @@ export default class AdminPage extends Component {
                 </Navbar.Collapse>
               </Navbar>
               </Styles>
+              <Route exact path="/adminpage" component={AdminFormHome} />
               <Route path="/adminpage/add-employee" component={AdminFormAddEmpl} />
               <Route path="/adminpage/delete-employee" component={AdminFormRestEmpl}/>
               <Route path="/adminpage/search-employee" component={AdminFormRestEmpl}/>

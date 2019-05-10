@@ -3,8 +3,6 @@ import { Nav, Navbar, Button, NavDropdown } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { LinkContainer } from 'react-router-bootstrap';
 import styled from 'styled-components';
-import AdminFormAssignEqu from './Forms/AdminFormAssignEqu'
-import AdminFormDelSearchEqu from './Forms/AdminFormDelSearchEqu'
 
 
 const Styles = styled.div`
@@ -75,8 +73,6 @@ export default class EmployeePage extends Component {
             </Navbar>
             <BottomNavigationBar />
           </Styles>
-          <Route path="/assign-equipment" component={AdminFormAssignEqu} />
-          <Route path="/search-equipment" component={AdminFormDelSearchEqu} />
         </Router>
       </React.Fragment>
     );

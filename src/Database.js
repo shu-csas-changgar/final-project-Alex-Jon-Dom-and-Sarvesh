@@ -126,7 +126,7 @@ app.post('/userlogin', (req, res) => {
       const vendorId = req.body.vendorId;
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Last_Updated) VALUES(?, ?, ?, ?)"
+      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Room_ID, Last_Updated) VALUES(?, ?, ?, 1, ?)"
 
         connection.query(sql, [type, serialNum, vendorId, now], (err, rows, fields) => {
           if(err) console.log(err)
@@ -140,6 +140,7 @@ app.post('/userlogin', (req, res) => {
         })
       })
 
+<<<<<<< HEAD
 // DELETE EMPLOYEE
 app.post('/query/delemp', (req, res) => {
     const id = req.body.id
@@ -181,6 +182,27 @@ app.post('/query/delemp', (req, res) => {
         }
       })
     })
+=======
+    // ADD Vendor
+    app.post('/query/addven', (req, res) => {
+      const name = req.body.name;
+      const phoneNum = req.body.phoneNumber;
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+      const sql = "INSERT INTO Vendor (Vendor_Name, Vendor_Phone_Number, Last_Updated) VALUES(?, ?, ?)"
+
+        connection.query(sql, [name, phoneNum, now], (err, rows, fields) => {
+          if(err) console.log(err)
+          else if(rows.length === 0){
+            console.log("Error")
+            res.json("INVALID")
+          }
+          else {
+            res.json(rows)
+          }
+        })
+      })
+>>>>>>> db6c00c314e287a8c58963e24694f5cdd1bd8352
 
 app.listen('3003', () => {
     console.log("Server is up and listening on 3003...")

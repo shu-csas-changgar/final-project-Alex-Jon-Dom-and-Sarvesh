@@ -13,15 +13,14 @@ function loc(id) {
   }
 }
 
-export default class AddEmpl extends React.Component {
+export default class AdminFormHomePage extends React.Component {
 
-  constructor(...args) {
-    super(...args)
+  constructor(props) {
+    super(props)
     this.state = {
         employees: [],
         vendors: [],
-        equipment: [],
-        empModalShow: false
+        equipment: []
     }
 
   }
@@ -38,6 +37,10 @@ export default class AddEmpl extends React.Component {
         elements[i].style.display = "";
       }
     }
+  }
+
+  test(obj) {
+    alert(obj);
   }
 
    componentDidMount() {
@@ -70,10 +73,9 @@ export default class AddEmpl extends React.Component {
 
 
   render() {
-      let empModalClose = () => this.setState({ empModalShow: false });
       return (
-        <Container style={{margin: "30px"}}>
-        <Card>
+        <Container style={{padding: "30px"}}>
+        <Card style={{margin: "0 auto", width: "95%"}}>
           <Card.Header as="h5">Admin Panel</Card.Header>
           <Card.Body>
             <Tabs defaultActiveKey="employees" id="uncontrolled-tab-example">
@@ -98,17 +100,25 @@ export default class AddEmpl extends React.Component {
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Location</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
                   {this.state.employees.map(el => (
-                    <tr>
+                    <tr key={"employee-" + el.Employee_ID}>
                       <td>{el.Employee_ID}</td>
                       <td>{el.First_Name}</td>
                       <td>{el.Last_Name}</td>
                       <td>{el.Email}</td>
                       <td>{el.Phone_Number}</td>
                       <td>{loc(el.Office_Location_ID)}</td>
+                      <td><Button variant="primary" onClick={this.test.bind(this, el)}>
+                            Edit
+                          </Button></td>
+                      <td><Button variant="primary" onClick={this.test.bind(this, el)}>
+                            Delete
+                          </Button></td>
                     </tr>
                   ))}
                   </tbody>
@@ -136,7 +146,7 @@ export default class AddEmpl extends React.Component {
                   </thead>
                   <tbody>
                   {this.state.vendors.map(el => (
-                    <tr>
+                    <tr key={"vendor-" + el.Vendor_ID}>
                       <td>{el.Vendor_ID}</td>
                       <td>{el.Vendor_Name}</td>
                       <td>{el.Vendor_Phone_Number}</td>
@@ -168,7 +178,7 @@ export default class AddEmpl extends React.Component {
                   </thead>
                   <tbody>
                   {this.state.equipment.map(el => (
-                    <tr>
+                    <tr key={"equipment-" + el.Equipment_Serial_Number}>
                       <td>{el.Equipment_Serial_Number}</td>
                       <td>{el.Vendor_ID}</td>
                       <td>{el.Equipment_Type}</td>

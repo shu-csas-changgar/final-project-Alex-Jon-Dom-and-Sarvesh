@@ -103,8 +103,6 @@ app.post('/userlogin', (req, res) => {
     const pass = req.body.password;
     const role = req.body.role;
     const office = req.body.officeLocation;
-    const floor = req.body.floor;
-    const room = req.body.room;
     const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     const sql = "INSERT INTO employee (First_Name, Last_Name, Email, Password, Phone_Number, Role_ID, Office_Location_ID, Last_Updated) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
@@ -141,6 +139,48 @@ app.post('/userlogin', (req, res) => {
           }
         })
       })
+
+// DELETE EMPLOYEE
+app.post('/query/delemp', (req, res) => {
+    const id = req.body.id
+    const sql = 'DELETE FROM employee WHERE Employee_ID = ?'
+
+    connection.query(sql, [id], (err, rows, fields) => {
+      if(err) console.log(err)
+      else if(rows.length === 0){
+        console.log("The employee does not exist!")
+        res.json("INVALID")
+      }
+      else{
+        res.json(rows)
+      }
+    })
+  })
+
+  // UPDATE EMPLOYEE
+  app.post('/query/updateemp', (req, res) => {
+    const id = req.body.id;
+    const fn = req.body.firstName;
+    const ln = req.body.lastName;
+    const pn = req.body.phoneNumber;
+    const email = req.body.email;
+    const role = req.body.role;
+    const office = req.body.officeLocation;
+    const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    const sql = "UPDATE employee SET First_Name = ?, Last_Name = ?, Email = ?, Phone_Number = ?, Role_ID = ?, Office_Location_ID = ?, Last_Updated = ? WHERE Employee_ID = ?"
+
+      connection.query(sql, [fn, ln, email, pn, role, office, now, id], (err, rows, fields) => {
+        if(err) console.log(err)
+        else if(rows.length === 0){
+          console.log("Error")
+          res.json("INVALID")
+        }
+        else {
+          res.json(rows)
+        }
+      })
+    })
 
 app.listen('3003', () => {
     console.log("Server is up and listening on 3003...")

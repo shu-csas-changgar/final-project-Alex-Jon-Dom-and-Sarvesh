@@ -54,13 +54,13 @@ class NavigationBar extends Component {
             console.log(data)
             this.props.action()
             this.props.history.push('/adminpage')
-          } 
+          }
         })
         .catch((error) =>{
           this.setState({message: "Unable to connect to the server at this time"})
         })
       }
-    
+
     handleEmailChange(event)   {
         this.setState({
             email: event.target.value

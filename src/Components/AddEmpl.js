@@ -69,7 +69,7 @@ export default class AddEmpl extends React.Component {
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control name="lastName" value={this.state.lastName} onChange={e => this.setState({ lastName: e.target.value})} type="text" placeholder="Last Name" />
               </Form.Group>
-              <Form.Group controlId="ControlInpu3">
+              <Form.Group controlId="ControlInput3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control name="lastName" value={this.state.email} onChange={e => this.setState({ email: e.target.value})} type="email" placeholder="Email Address" />
               </Form.Group>

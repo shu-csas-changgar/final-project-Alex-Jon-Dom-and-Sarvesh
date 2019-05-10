@@ -64,7 +64,7 @@ export default class AdminFormHomePage extends React.Component {
      //EQUIPMENT
      fetch('../../query/getequipment')
      .then( res => res.json())
-     .then( data => this.setState({equpiment: data }))
+     .then( data => this.setState({equipment: data }))
      .catch((error) =>{
        this.setState({message: "Unable to connect to the server at this time"})
      })

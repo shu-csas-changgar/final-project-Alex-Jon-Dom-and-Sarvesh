@@ -103,8 +103,6 @@ app.post('/userlogin', (req, res) => {
     const pass = req.body.password;
     const role = req.body.role;
     const office = req.body.officeLocation;
-    const floor = req.body.floor;
-    const room = req.body.room;
     const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     const sql = "INSERT INTO employee (First_Name, Last_Name, Email, Password, Phone_Number, Role_ID, Office_Location_ID, Last_Updated) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
@@ -128,9 +126,29 @@ app.post('/userlogin', (req, res) => {
       const vendorId = req.body.vendorId;
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Last_Updated) VALUES(?, ?, ?, ?)"
+      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Room_ID, Last_Updated) VALUES(?, ?, ?, 1, ?)"
 
         connection.query(sql, [type, serialNum, vendorId, now], (err, rows, fields) => {
+          if(err) console.log(err)
+          else if(rows.length === 0){
+            console.log("Error")
+            res.json("INVALID")
+          }
+          else {
+            res.json(rows)
+          }
+        })
+      })
+
+    // ADD Vendor
+    app.post('/query/addven', (req, res) => {
+      const name = req.body.name;
+      const phoneNum = req.body.phoneNumber;
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+      const sql = "INSERT INTO Vendor (Vendor_Name, Vendor_Phone_Number, Last_Updated) VALUES(?, ?, ?)"
+
+        connection.query(sql, [name, phoneNum, now], (err, rows, fields) => {
           if(err) console.log(err)
           else if(rows.length === 0){
             console.log("Error")

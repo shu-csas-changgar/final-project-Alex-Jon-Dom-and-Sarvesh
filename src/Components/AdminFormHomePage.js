@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Tab, Container, Card, Table, InputGroup, FormControl, Modal, Button, ButtonToolbar, Form } from 'react-bootstrap';
+import { Tabs, Tab, Container, Card, Table, InputGroup, FormControl, Modal, Button, Form } from 'react-bootstrap';
 
 function loc(id) {
   if (id === 1) {

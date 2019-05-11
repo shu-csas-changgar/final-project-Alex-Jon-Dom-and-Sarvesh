@@ -53,7 +53,7 @@ class NavigationBar extends Component {
             // Set the global state to true
             console.log(data)
             this.props.action()
-            this.props.history.push('/adminpage')
+            this.props.history.push('/employeepage')
           }
         })
         .catch((error) =>{

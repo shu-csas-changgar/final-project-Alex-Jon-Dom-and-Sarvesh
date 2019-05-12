@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { Navbar, Nav, Form, Col, Row, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
+function setCookie(name, value, days) {
+    var d = new Date;
+    d.setTime(d.getTime() + 24*60*60*1000*days);
+    document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+}
+
 const Styles = styled.div`
         .navbar {
             background-color: #222;
@@ -50,10 +56,13 @@ class NavigationBar extends Component {
             this.setState({message: "Username or password is incorrect"})
           }
           else{
+            const roleID = data[0].Role_ID;
             // Set the global state to true
             console.log(data)
-            this.props.action()
-            this.props.history.push('/employeepage')
+            console.log("Role ID: " + roleID)
+            setCookie("employeeID", data[0].Employee_ID, 1);
+            this.props.action();
+            this.props.history.push((roleID === 1 ? '/adminpage' : '/employee'))
           }
         })
         .catch((error) =>{

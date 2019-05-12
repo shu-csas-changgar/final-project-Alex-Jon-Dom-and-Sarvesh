@@ -38,7 +38,7 @@ export default class AddEmpl extends React.Component {
         else{
           // Set the global state to true
           console.log(data)
-          this.props.action()
+          window.alert("The Employee has been Successfully Added!")
           this.props.history.push('/adminpage/addempl')
         }
       })

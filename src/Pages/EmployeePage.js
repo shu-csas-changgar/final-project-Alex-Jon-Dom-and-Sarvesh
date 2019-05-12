@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { Nav, Navbar, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { LinkContainer } from 'react-router-bootstrap';
-import Employee from './EmployeePage';
 import styled from 'styled-components';
-import AdminFormAddEmpl from './Forms/AdminFormAddEmpl'
-import AdminFormAddEqu from './Forms/AdminFormAddEqu'
-import AdminFormAddVen from './Forms/AdminFormAddVen'
-import AdminFormHome from './Forms/AdminFormHome'
+import EmployeeFormHome from './Forms/EmployeeFormHome'
+import EmployeePersonal from './Forms/EmployeePersonalPage'
 
 const Styles = styled.div`
 .navbar {
@@ -35,16 +32,12 @@ export const BottomNavigationBar = () => (
 
 )
 
-export default class AdminPage extends Component {
+export default class EmployeePage extends Component {
 
-  state = {
-    fields: {}
-  };
-
-  onSubmit = fields => {
-    this.setState({ fields });
-    console.log("Comp got: ", fields);
-  };
+  constructor(props) {
+    super(props);
+    console.log(this.props)
+  }
 
   render() {
     return (
@@ -52,7 +45,7 @@ export default class AdminPage extends Component {
         <Router>
           <Styles>
             <Navbar>
-              <LinkContainer to="/adminpage">
+              <LinkContainer to="/employee">
                 <Navbar.Brand>ABC Group</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle />
@@ -63,27 +56,10 @@ export default class AdminPage extends Component {
             </Navbar>
             <Navbar expand="lg">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                  <Nav.Link>Personal</Nav.Link>
-                  <LinkContainer to="/adminpage/add-employee">
-                    <Nav.Link>Add Employee</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/adminpage/add-equipment">
-                    <Nav.Link>Add Equipment</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/adminpage/add-vendor">
-                    <Nav.Link>Add Vendor</Nav.Link>
-                  </LinkContainer>
-                </Nav>
-              </Navbar.Collapse>
             </Navbar>
           </Styles>
-          <Route exact path="/adminpage" component={AdminFormHome} />
-          <Route path="/adminpage/add-employee" component={AdminFormAddEmpl} />
-          <Route path="/adminpage/add-equipment" component={AdminFormAddEqu} />
-          <Route path="/adminpage/add-vendor" component={AdminFormAddVen} />
-          <Route path="/adminpage/employee" component={Employee} />
+          <Route exact path="/employee" employee={this.props.employee} component={EmployeeFormHome} />
+          <Route path="/employee/personal" employee={this.props.employee} component={EmployeePersonal} />
         </Router>
         <BottomNavigationBar />
       </React.Fragment>

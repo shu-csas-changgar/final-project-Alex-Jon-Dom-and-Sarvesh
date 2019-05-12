@@ -17,7 +17,8 @@ constructor()  {
   this.state={
     LoggedIn: false,
     isAdmin: false,
-    isEmployee: false
+    isEmployee: false,
+    employee: ''
   }
   this.handler = this.handler.bind(this)
 }
@@ -34,9 +35,9 @@ handler()   {
       <React.Fragment>
           <Router>
             <Switch>
-              <Route exact path="/" render={(props) => <Home {...props} action ={this.handler} />}/>
+              <Route exact path="/" render={(props) => <Home {...props} action={this.handler} />}/>
               <ProtectedRoute exact path = "/adminpage" component = {AdminPage} Logged={this.state.LoggedIn} />
-              <ProtectedRoute exact path = "/employeepage" component = {EmployeePage} Logged={this.state.LoggedIn} />
+              <ProtectedRoute exact path = "/employee" component = {EmployeePage} Logged={this.state.LoggedIn} />
               <Route path="/about" component={About} />
               <Route component={NoMatch} />
             </Switch>

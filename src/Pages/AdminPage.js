@@ -65,7 +65,6 @@ export default class AdminPage extends Component {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                  <Nav.Link>Personal</Nav.Link>
                   <LinkContainer to="/adminpage/add-employee">
                     <Nav.Link>Add Employee</Nav.Link>
                   </LinkContainer>

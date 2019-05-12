@@ -32,7 +32,7 @@ export default class AddVen extends React.Component {
                 else {
                     // Set the global state to true
                     console.log(data)
-                    this.props.action()
+                    window.alert("The Vendor has been Successfully Added!")
                     this.props.history.push('/adminpage/addven')
                 }
             })

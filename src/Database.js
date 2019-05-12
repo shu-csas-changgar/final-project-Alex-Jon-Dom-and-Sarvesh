@@ -59,7 +59,7 @@ app.get('/query/getvendors', (req, res) => {
 
 //EQUIPMENT
 app.get('/query/getequipment', (req, res) => {
-    const sql = 'SELECT * FROM equipment WHERE Room_ID = 1'
+    const sql = 'SELECT * FROM equipment'
 
     connection.query(sql, (err, rows, fields) => {
       if(err) console.log(err)
@@ -74,12 +74,64 @@ app.get('/query/getequipment', (req, res) => {
     })
   })
 
+  //EMPLOYEE EQUIPMENT
+app.get('/query/getemployeeequipment', (req, res) => {
+  const sql = 'SELECT * FROM equipment WHERE Employee_ID IS NULL AND Department_ID IS NULL AND Office_Location_ID = 1 AND Floor_Number = 1 AND Room_ID = 1'
+
+  connection.query(sql, (err, rows, fields) => {
+    if(err) console.log(err)
+    else if(rows.length === 0){
+      console.log("Error")
+      res.json("INVALID")
+    }
+    else{
+      rows.map( x => console.log(`Success`))
+      res.json(rows)
+    }
+  })
+})
+
+  //EMPLOYEE OWN EQUIPMENT
+  app.post('/query/getmyequipment', (req, res) => {
+    const employee = req.body.employeeID;
+    const sql = 'SELECT * FROM equipment WHERE Employee_ID = ?'
+
+    connection.query(sql, [employee], (err, rows, fields) => {
+      if(err) console.log(err)
+      else if(rows.length === 0){
+        console.log("The username or password was incorrect")
+        res.json("INVALID")
+      }
+      else{
+        rows.map( x => console.log(`Success`))
+        res.json(rows)
+      }
+    })
+  })
+
+    //RETURN EMPLOYEE OWN EQUIPMENT
+    app.post('/query/returnequipment', (req, res) => {
+      const id = req.body.id;
+      const sql = 'UPDATE equipment SET Employee_ID = NULL, Office_Location_ID = ?, Floor_Number = ?, Room_ID = ?, Last_Updated = ? WHERE Equipment_ID = ?'
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+      connection.query(sql, [1, 1, 1, now, id], (err, rows, fields) => {
+        if(err) console.log(err)
+        else if(rows.length === 0){
+          console.log("There was an error returning that equipment.")
+          res.json("INVALID")
+        }
+        else{
+          res.json(rows)
+        }
+      })
+    })
 
 //USER LOGIN
 app.post('/userlogin', (req, res) => {
     const username = req.body.email
     const password = req.body.password
-    const sql = 'SELECT Email, Password FROM employee WHERE Email = ? AND Password = ?'
+    const sql = 'SELECT Employee_ID, Email, Password, Role_ID FROM employee WHERE Email = ? AND Password = ?'
 
     connection.query(sql, [username, password], (err, rows, fields) => {
       if(err) console.log(err)
@@ -124,17 +176,43 @@ app.post('/userlogin', (req, res) => {
       const type = req.body.type;
       const serialNum = req.body.serialNum;
       const vendorId = req.body.vendorId;
-      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      const employeeID = (req.body.employeeID === '' ? null : req.body.employeeID);
+      const officeLocation = (req.body.officeLocation === '' ? null : req.body.officeLocation);
+      const floor = (req.body.floor === '' ? null : req.body.floor);
+      const room = (req.body.room === '' ? null : req.body.room);
+      const department = (req.body.department === '' ? null : req.body.department);
 
-      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Vendor_ID, Room_ID, Last_Updated) VALUES(?, ?, ?, ?, ?)"
+      var d = new Date();
+      const now = d.toISOString().slice(0, 19).replace('T', ' ');
+      d.setFullYear(d.getFullYear() + 5);
+      const exp = d.toISOString().slice(0, 19).replace('T', ' ');
 
-        connection.query(sql, [type, serialNum, vendorId, now], (err, rows, fields) => {
+      const sql = "INSERT INTO equipment (Equipment_Type, Equipment_Serial_Number, Expiration_Date, Vendor_ID, Employee_ID, Office_Location_ID, Floor_Number, Room_ID, Department_ID, Last_Updated) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+
+        connection.query(sql, [type, serialNum, exp, vendorId, employeeID, officeLocation, floor, room, department, now], (err, rows, fields) => {
           if(err) console.log(err)
           else if(rows.length === 0){
             console.log("Error")
             res.json("INVALID")
           }
           else {
+            res.json(rows)
+          }
+        })
+      })
+
+      // DELETE EQUIPMENT
+      app.post('/query/delequ', (req, res) => {
+        const id = req.body.id
+        const sql = 'DELETE FROM equipment WHERE Equipment_ID = ?'
+
+        connection.query(sql, [id], (err, rows, fields) => {
+          if(err) console.log(err)
+          else if(rows.length === 0){
+            console.log("The equipment does not exist!")
+            res.json("INVALID")
+          }
+          else{
             res.json(rows)
           }
         })
@@ -201,6 +279,48 @@ app.post('/query/delemp', (req, res) => {
           }
         })
       })
+
+      app.post('/query/assignequ', (req, res) => {
+        const id = req.body.id;
+        const employee = (req.body.employeeID === "NULL" ? null : req.body.employeeID);
+        const officeLocation = (req.body.officeLocation === '' ? null : req.body.officeLocation);
+        const floorNum = (req.body.floorNum === '' ? null : req.body.floorNum);
+        const room = (req.body.roomNum === '' ? null : req.body.roomNum);
+        const department = (req.body.departmentID === '' ? null : req.body.departmentID);
+        const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    
+        const sql = "UPDATE equipment SET Employee_ID = ?, Office_Location_ID = ?, Floor_Number = ?, Room_ID = ?, Department_ID = ?, Last_Updated = ? WHERE Equipment_ID = ?"
+    
+          connection.query(sql, [employee, officeLocation, floorNum, room, department, now, id], (err, rows, fields) => {
+            if(err) console.log(err)
+            else if(rows.length === 0){
+              console.log("Error")
+              res.json("INVALID")
+            }
+            else {
+              res.json(rows)
+            }
+          })
+        })
+
+        app.post('/query/assignemployeeequ', (req, res) => {
+          const id = req.body.id;
+          const employee = req.body.employeeID;
+          const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      
+          const sql = "UPDATE equipment SET Employee_ID = ?, Office_Location_ID = NULL, Floor_Number = NULL, Room_ID = NULL, Last_Updated = ? WHERE Equipment_ID = ?"
+      
+            connection.query(sql, [employee, now, id], (err, rows, fields) => {
+              if(err) console.log(err)
+              else if(rows.length === 0){
+                console.log("Error")
+                res.json("INVALID")
+              }
+              else {
+                res.json(rows)
+              }
+            })
+          })
 
 app.listen('3003', () => {
     console.log("Server is up and listening on 3003...")

@@ -212,7 +212,7 @@ export default class EmployeePersonalPage extends React.Component {
                     placeholder="Serial Number, Vendor ID, Location, Etc."
                     aria-label="Name"
                     aria-describedby="basic-addon1"
-                    onKeyUp={this.filterSearch.bind(this, "availablEquipment")}
+                    onKeyUp={this.filterSearch.bind(this, "availableEquipment")}
                   />
                 </InputGroup>
                 <Card.Text>

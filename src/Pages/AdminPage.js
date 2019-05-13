@@ -9,6 +9,7 @@ import AdminFormAddEqu from './Forms/AdminFormAddEqu'
 import AdminFormAddVen from './Forms/AdminFormAddVen'
 import AdminFormHome from './Forms/AdminFormHome'
 
+
 const Styles = styled.div`
 .navbar {
   background-color: #222;
@@ -26,7 +27,6 @@ const Styles = styled.div`
 export const BottomNavigationBar = () => (
   <Styles>
     <Navbar expand="lg" sticky="bottom">
-      <Navbar.Brand href="/help">Help</Navbar.Brand>
       <Navbar.Brand position="right">Address: 400 South Orange Ave, South Orange, NJ 07079</Navbar.Brand>
       <Navbar.Brand position="right">Contact: (973) 761-9000</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -100,7 +100,7 @@ class NavigationBar extends Component {
                                 <Form.Group as={Row} controlId="formHorizontalPassword">
                                     <Form.Label column sm={1000}>Password:&nbsp;</Form.Label>
                                     <Col sm={15}>
-                                        <Form.Control onChange={this.handlePassChange.bind(this)} value={this.state.password} size="sm" type="text" placeholder="Enter your password" />
+                                        <Form.Control onChange={this.handlePassChange.bind(this)} value={this.state.password} size="sm" type="password" placeholder="Enter your password" />
                                     </Col>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">Submit</Button>

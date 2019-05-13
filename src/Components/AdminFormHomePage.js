@@ -428,15 +428,15 @@ export default class AdminFormHomePage extends React.Component {
                     </Card.Text>
                     <Form.Group controlId="ControlInput1">
                       <Form.Label>Office Location</Form.Label>
-                      <Form.Control name="officeLocation" defaultValue={this.state.assignEqu.Office_Location_ID} type="number" placeholder="Office Location" />
+                      <Form.Control name="officeLocation" type="number" placeholder="Office Location" />
                     </Form.Group>
                     <Form.Group controlId="ControlInput2">
                       <Form.Label>Floor Number</Form.Label>
-                      <Form.Control name="floorNum" defaultValue={this.state.assignEqu.Floor_Number} type="number" placeholder="Floor Number" />
+                      <Form.Control name="floorNum"  type="number" placeholder="Floor Number" />
                     </Form.Group>
                     <Form.Group controlId="ControlInput3">
                       <Form.Label>Room Number</Form.Label>
-                      <Form.Control name="roomNum" defaultValue={this.state.assignEqu.Room_ID} type="number" placeholder="Room Number" />
+                      <Form.Control name="roomNum"  type="number" placeholder="Room Number" />
                     </Form.Group>
                   </Card.Body>
               </Card>
@@ -449,7 +449,7 @@ export default class AdminFormHomePage extends React.Component {
                     </Card.Text>
                     <Form.Group controlId="ControlInput4">
                       <Form.Label>Department</Form.Label>
-                      <Form.Control name="departmentID" defaultValue={this.state.assignEqu.Department_ID} type="number" placeholder="Department ID" />
+                      <Form.Control name="departmentID" type="number" placeholder="Department ID" />
                     </Form.Group>
                   </Card.Body>
               </Card>

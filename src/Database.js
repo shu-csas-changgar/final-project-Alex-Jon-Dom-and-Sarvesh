@@ -280,6 +280,24 @@ app.post('/query/delemp', (req, res) => {
       })
     })
 
+
+// DELETE VENDOR
+      app.post('/query/delven', (req, res) => {
+        const id = req.body.id
+        const sql = 'DELETE FROM vendor WHERE Vendor_ID = ?'
+
+        connection.query(sql, [id], (err, rows, fields) => {
+          if(err) console.log(err)
+          else if(rows.length === 0){
+            console.log("The equipment does not exist!")
+            res.json("INVALID")
+          }
+          else{
+            res.json(rows)
+          }
+        })
+      })
+
     app.post('/query/updateven', (req, res) => {
       const id = req.body.id;
       const vn = req.body.vendorName;

@@ -201,6 +201,26 @@ app.post('/userlogin', (req, res) => {
         })
       })
 
+
+// ADD VENDOR
+      app.post('/query/addven', (req, res) => {
+        const name = req.body.name
+        const phonenumber = req.body.phoneNumber
+        const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        const sql = "INSERT INTO vendor (Vendor_Name, Vendor_Phone_Number, Last_Updated) VALUES (?, ?, ?)"
+
+        connection.query(sql, [name, phonenumber, now], (err, rows, fields) => {
+          if(err) console.log(err)
+          else if(rows.length === 0){
+            console.log("Error")
+            res.json("INVALID")
+          }
+          else{
+            res.json(rows)
+          }
+        })
+      })
+
       // DELETE EQUIPMENT
       app.post('/query/delequ', (req, res) => {
         const id = req.body.id
